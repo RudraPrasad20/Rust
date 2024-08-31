@@ -45,13 +45,13 @@ fn main() {
     let xyz = 5;
     println!("first value : {xyz}");
 
-    // after uncomment this it will show error 
+    // after uncomment this it will show error
     // you cant change the value again, it is trying to set the xyz value to a bool which is not possible, it is decleard as i32 before (5)
-    // and if you will change the value to a int, let suppose 3, it will again show error, you cant change it because it is immutade by default, you need to declear as mut to the previous value  
-    
+    // and if you will change the value to a int, let suppose 3, it will again show error, you cant change it because it is immutade by default, you need to declear as mut to the previous value
+
     //   xyz = true;
     //  println!("middle value : {xyz}");
 
-    let  xyz = false;
+    let xyz = false;
     println!("last value : {xyz}");
 }
