@@ -54,4 +54,38 @@ fn main() {
 
     let xyz = false;
     println!("last value : {xyz}");
+
+    // Tuple:
+    // it declears multiple values in a single line
+    let tup: (i32, f64, u8) = (500, 6.4, 1);
+
+    // also we can declear the tuple like this:
+    // it is just like our interface in ts
+    let tup = (500, 6.4, 1, true);
+    let (x, y, z, e) = tup;
+
+    println!("The value of y is: {x}");
+
+    // also you can define at the top & then use those value one by one, think it like an array
+    // it starts from 0 - index no
+    let name: (i32, f64, u8) = (500, 6.4, 1);
+    let five_hundred = name.0;
+
+    let six_point_four = name.1;
+
+    let one = name.2;
+    println!("here is your tup value: {five_hundred}");
+
+    // Array:
+    // to define the type: [type, size]
+    let a = [1, 2, 3, 4, 5];
+
+    // to access a single value: access them with index number
+    let first = a[0];
+    let second = a[1];
+
+    // if you are writing a single value multiple time inside of an array, you should write like this:
+    // similar to writing 3 - 5 times
+    let a = [3; 5];
+
 }
