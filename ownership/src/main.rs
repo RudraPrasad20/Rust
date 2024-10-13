@@ -55,7 +55,50 @@ fn main() {
     // it calls a function which returns string
     let sr = String::from("hii there");
     let sm = takes_ownership();
-    println!("{sm}")
+    println!("{sm}");
+
+    // see in this example 1st we created a name nme which will be the input for calculating the length
+    // then we called length_calculator function
+    // but after calling the function we cant do println the nme, because the ownership has been moved to the length_calculator
+    // to println the nme what we can do is:-
+    // we decleared another name which takes the name and length & nme passes to length_calculator function
+    // snm is the name or string and len is length
+    let nme = String::from("calculating length");
+    let (snm, len) = length_calculator(nme);
+    // length_calculator(nme);
+    // println!("{nme}");
+     println!("the name is {snm} & length is {len}");
+
+    // REFERENCES :-
+    // String - ownership
+    // &String - reference | * - dereference
+    // here s is the reference, sone is the owner
+    // we did mut everyware because we passed the &mut at the calculate_length function
+    let mut sone = String::from("hello"); // sm : original pointer
+    let len = calculate_length(&mut sone);
+    println!("The length of '{sone}' is {len}.");
+
+    // if we will do this it will show error because we are trying to mut the original owner s
+    // let mut s = String::from("hello");
+    // let r1 = &s; // no problem
+    // let r2 = &s; // no problem
+    // let r3 = &mut s; // BIG PROBLEM
+    // println!("{}, {}, and {}", r1, r2, r3);
+    // if we will print the r3 only, then it will work because the r1 and r2 has created and ened there only in the same line, we never used those
+    // println!("{}, r3);
+
+    // but we can mut the st here, how?
+    // see here we moved the println to the top of r3, and the ownership lasts untill it is used somewhere
+    // here we used the r1 and r2 as println so the ownership has been gone , now we can mut the r3 
+    let mut st = String::from("hello");
+
+    let r1 = &st; // no problem
+    let r2 = &st; // no problem
+    println!("{r1} and {r2}");
+    // variables r1 and r2 will not be used after this point
+    let r3 = &mut st; // no problem
+    println!("{r3}");
+
 }
 
 fn add(n: i32) -> i32 {
@@ -70,3 +113,22 @@ fn takes_ownership() -> String {
     let s: String = String::from("This is a string from gives ownership"); // some_string comes into scope
     s
 }
+
+fn length_calculator(s: String) -> (String, usize) {
+    let length = s.len(); // len() returns the length of a String
+    (s, length)
+}
+
+// &String - pointer referancing to index
+// String - move
+// &String - borrowing
+// we cant mutate the s here, because we have borrowed the value and we dont have the permission to mut, it is a ref
+// but we can change the value at the top, because that is the owner - sone
+fn calculate_length(s: &mut String) -> usize {
+    // if we will try to push something - it will show error, for that we have to change the mut the &String - &mut String
+    s.push_str(", world");
+    s.len() // to access length
+}
+// we can't take multiple mutable referances
+
+// Tuples, if they only contain types that also implement Copy. For example, (i32, i32) implements Copy, but (i32, String) does not.
