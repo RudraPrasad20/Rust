@@ -67,7 +67,7 @@ fn main() {
     let (snm, len) = length_calculator(nme);
     // length_calculator(nme);
     // println!("{nme}");
-     println!("the name is {snm} & length is {len}");
+    println!("the name is {snm} & length is {len}");
 
     // REFERENCES :-
     // String - ownership
@@ -89,7 +89,7 @@ fn main() {
 
     // but we can mut the st here, how?
     // see here we moved the println to the top of r3, and the ownership lasts untill it is used somewhere
-    // here we used the r1 and r2 as println so the ownership has been gone , now we can mut the r3 
+    // here we used the r1 and r2 as println so the ownership has been gone , now we can mut the r3
     let mut st = String::from("hello");
 
     let r1 = &st; // no problem
@@ -98,6 +98,27 @@ fn main() {
     // variables r1 and r2 will not be used after this point
     let r3 = &mut st; // no problem
     println!("{r3}");
+
+    // SLICE:-
+    let mut sli = String::from("hello world");
+    let word = first_word_slice(&sli); // word will get the value 5 because the first word is hello
+    sli.clear();
+    // this empties the String, making it equal to ""
+    // word still has the value 5 here, but there's no more string that
+    // [starting_index..ending_index]
+    let hello = &sli[0..5]; // word hello - index 0 to 5
+    let world = &sli[6..11]; // word world - index 6 to 11
+
+    let sliceone = &sli[0..2];
+    let slicetwo = &sli[..2];
+
+    let lent = sli.len();
+
+    let slicethree = &sli[3..lent];
+    let slicefour = &sli[3..];
+
+    let slicefive = &sli[0..lent];
+    let slicesix = &sli[..];
 
 }
 
@@ -132,3 +153,22 @@ fn calculate_length(s: &mut String) -> usize {
 // we can't take multiple mutable referances
 
 // Tuples, if they only contain types that also implement Copy. For example, (i32, i32) implements Copy, but (i32, String) does not.
+
+//  SLICE TYPE:-
+//  write a function that takes a string of words separated by spaces and returns the first word it finds in that string. If the function doesn’t find a space in the string, the whole string must be one word, so the entire string should be returned.
+
+fn first_word_slice(s: &String) -> usize {
+    //  we’ll convert our String to an array of bytes using the as_bytes method.
+    let sl = s.as_bytes();
+    // iteraing with for loop in sl
+    for (i, &item) in sl.iter().enumerate() {
+        // finding space in the byte
+        if item == b' ' {
+            return i;
+            // return &s[0..i]; // same , returns 1st word
+        }
+    }
+    s.len()
+    // &s[..] //same, retruns length
+    
+}
