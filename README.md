@@ -7,3 +7,8 @@
 - cargo build - to build
 - cargo run - to compile and build at once
 - cargo build --release - for production
+---
+### Projects:
+- Guessing Game
+- CLI
+- Web Server
